@@ -1,7 +1,14 @@
 from django.shortcuts import render
 import calendar
 from calendar import HTMLCalendar
-def home (request, year , month):
+from datetime import datetime 
+from .models import Event
+
+def all_events(request):
+    event_list = Event.objects.all()
+    return render(request,'events/event_list.html',{'event_list':event_list})
+
+def home (request, year=datetime.now().year , month=datetime.now().strftime('%B')):
     name =  "Stephen"
     month = month.title()
     #convert month from name to number
@@ -10,10 +17,19 @@ def home (request, year , month):
 
     #creating a calender object
     cal = HTMLCalendar().formatmonth(year,month_number)
-    return render(request,'home.html',{
+
+    #get current year
+    now =  datetime.now()
+    current_year = now.year
+    #get current time
+    time = now.strftime('%I : %M  %p')
+
+    return render(request,'events/home.html',{
         "name": name,
         "year": year,
         "month": month,
         "month_number":month_number,
-        "cal": cal
+        "cal": cal,
+        "current_year" : current_year,
+        "time":time
     })
