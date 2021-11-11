@@ -2,8 +2,11 @@ from django.shortcuts import render
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime 
-from .models import Event
+from .models import Event, Venue
+from .forms import VenueForm
 
+def add_venue(request):
+    return render(request,'events/add_venue.html',{})
 def all_events(request):
     event_list = Event.objects.all()
     return render(request,'events/event_list.html',{'event_list':event_list})
