@@ -4,11 +4,16 @@
     <center>
         <h1>Add venue to Database</h1>
         <br><br><br>
-        <form action="" method="post">
-            {% csrf_token %}
+        {% if submitted %}
+            Your submission is noted !!
+        {% else %}
 
-            {{ form.as_p }}
-            <input type="submit" value="submit" class="btn btn-secondary">
-        </form>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <input type="submit" value="submit" class="btn btn-secondary">
+            </form>
+        {% endif %}
     </center>
 {% endblock %}
