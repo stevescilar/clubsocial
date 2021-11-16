@@ -2,18 +2,27 @@
 
 {% block content %}
     <center>
-        <h1>Add venue to Database</h1>
         <br><br><br>
         {% if submitted %}
-            Your submission is noted !!
+        <div class="alert alert-success" role="alert">
+            You've successfully added an event.
+        </div>
         {% else %}
+    <div class="container-fluid"> 
+       
+        <div class="row">
+            
+            <div class="col-9 col-sm-3">
+                <h2>Add venue to Database</h2>
+                <form action="" method="POST">
+                    {% csrf_token %}
 
-            <form action="" method="POST">
-                {% csrf_token %}
-
-                {{ form.as_p }}
-                <input type="submit" value="submit" class="btn btn-secondary">
-            </form>
+                    {{ form.as_p }}
+                    <input type="submit" value="submit" class="btn btn-secondary">
+                </form>
+            </div>
+        </div>
+    </div>  
         {% endif %}
     </center>
 {% endblock %}
